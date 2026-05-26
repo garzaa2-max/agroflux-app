@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgroFlux • Ahorra agua, produce más</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        window.tailwind = { config: { corePlugins: { preflight: false } } };
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Playfair+Display:wght@700&amp;display=swap');
+        
+        body {
+            font-family: 'Inter', system_ui, sans-serif;
+        }
+        
+        .hero-bg {
+            background: linear-gradient(135deg, #166534 0%, #14532d 100%);
+        }
+        
+        .section-title {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-weight: 700;
+            letter-spacing: -0.025em;
+        }
+
+        .plan-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .plan-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
+
+        .slogan {
+            font-size: 1.05rem;
+            line-height: 1.3;
+            font-weight: 500;
+            color: #d1fae5;
+        }
+    </style>
+</head>
+<body class="bg-zinc-50 text-zinc-800">
+    <!-- NAV -->
+    <nav class="bg-white border-b border-zinc-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex justify-between items-center h-20">
+                <!-- LOGO + TEXTO (como en tu captura) -->
+                <div class="flex items-center gap-x-3">
+                    <img src="agroflux R HD.png" alt="AgroFlux Logo" class="h-14 w-auto" style="max-height: 56px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15));">
+                    
+                    <div class="flex flex-col justify-center -mt-0.5">
+                        <span class="font-bold text-3xl tracking-tighter">AgroFlux®</span>
+                        <span class="text-[10px] font-mono text-emerald-700 -mt-1">Tecnología Aplicada</span>
+                    </div>
+                </div>
+                
+                <div class="hidden md:flex items-center gap-x-8 text-sm font-medium">
+                    <a href="#beneficios" class="hover:text-emerald-700 transition-colors">Beneficios</a>
+                    <a href="#planes" class="hover:text-emerald-700 transition-colors">Planes</a>
+                    <a href="#como-funciona" class="hover:text-emerald-700 transition-colors">Cómo funciona</a>
+                    <a href="#demo" class="hover:text-emerald-700 transition-colors">Demo</a>
+                </div>
+                
+                <div class="flex items-center gap-x-4">
+                    <button onclick="showDemoModal()" 
+                            class="px-5 py-2.5 text-sm font-semibold border border-emerald-700 text-emerald-700 rounded-3xl hover:bg-emerald-50 transition-all active:scale-[0.985]">
+                        <i class="fa-solid fa-play mr-2"></i> Ver demo 1 min
+                    </button>
+                    <button onclick="scrollToPlans()" 
+                            class="px-6 py-2.5 bg-emerald-700 hover:bg-emerald-800 text-white text-sm font-semibold rounded-3xl transition-all active:scale-[0.985]">
+                        Empezar ahora
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO CON SLOGAN -->
+    <header class="hero-bg text-white pt-16 pb-20">
+        <div class="max-w-5xl mx-auto px-6 text-center">
+            <div class="inline-flex items-center gap-x-2 bg-white/10 backdrop-blur-md px-4 py-1.5 rounded-3xl text-sm mb-6 border border-white/20">
+                <div class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
+                <span class="font-medium">Disponible en Nuevo León • Tamaulipas • Coahuila</span>
+            </div>
+            
+            <h1 class="text-6xl md:text-7xl font-bold tracking-tighter leading-none mb-6">
+                Agua que se queda.<br>
+                <span class="text-emerald-300">Rendimiento que crece.</span>
+            </h1>
+            
+            <!-- SLOGAN -->
+            <div class="max-w-2xl mx-auto mb-8">
+                <p class="slogan">
+                    Agricultura con ciencia, impacto y conciencia.
+                </p>
+            </div>
+            
+            <p class="max-w-2xl mx-auto text-xl text-emerald-100 mb-10">
+                La primera suscripción agrícola que usa <strong>FIJA-FLUX</strong> y tecnología NuPoK para reducir hasta 50% el consumo de agua y mejorar tu cosecha.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <button onclick="scrollToPlans()" 
+                        class="px-10 py-4 bg-white text-emerald-800 font-semibold text-lg rounded-3xl flex items-center justify-center gap-x-3 hover:bg-amber-50 active:scale-[0.985] transition-all shadow-xl">
+                    <span>Elige tu plan</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+                
+                <button onclick="requestDemo()" 
+                        class="px-8 py-4 border border-white/60 hover:bg-white/10 text-white font-semibold text-lg rounded-3xl flex items-center justify-center gap-x-3 transition-all">
+                    <i class="fa-solid fa-seedling"></i>
+                    <span>Solicitar demo gratis (0.5 ha)</span>
+                </button>
+            </div>
+            
+            <div class="mt-12 flex justify-center gap-x-8 text-sm opacity-75">
+                <div class="flex items-center gap-x-2">
+                    <i class="fa-solid fa-check text-emerald-400"></i>
+                    <span>100% orgánico OMRI</span>
+                </div>
+                <div class="flex items-center gap-x-2">
+                    <i class="fa-solid fa-check text-emerald-400"></i>
+                    <span>Resultados en 15-30 días</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- MÉTRICAS -->
+    <div class="max-w-5xl mx-auto px-6 -mt-8">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div class="bg-white rounded-3xl p-6 shadow-sm border border-zinc-100">
+                <div class="text-emerald-700 text-sm font-medium">AHORRO DE AGUA</div>
+                <div class="text-5xl font-bold text-zinc-900 mt-1">47%</div>
+                <div class="text-xs text-zinc-500 mt-1">promedio reportado por productores</div>
+            </div>
+            <div class="bg-white rounded-3xl p-6 shadow-sm border border-zinc-100">
+                <div class="text-emerald-700 text-sm font-medium">INCREMENTO RENDIMIENTO</div>
+                <div class="text-5xl font-bold text-zinc-900 mt-1">+23%</div>
+                <div class="text-xs text-zinc-500 mt-1">kg/ha en tomate y chile</div>
+            </div>
+            <div class="bg-white rounded-3xl p-6 shadow-sm border border-zinc-100">
+                <div class="text-emerald-700 text-sm font-medium">CLIENTES ACTIVOS</div>
+                <div class="text-5xl font-bold text-zinc-900 mt-1">127</div>
+                <div class="text-xs text-zinc-500 mt-1">productores en el norte</div>
+            </div>
+            <div class="bg-white rounded-3xl p-6 shadow-sm border border-zinc-100">
+                <div class="text-emerald-700 text-sm font-medium">SATISFACCIÓN</div>
+                <div class="text-5xl font-bold text-zinc-900 mt-1">98%</div>
+                <div class="text-xs text-zinc-500 mt-1">renuevan cada mes</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- BENEFICIOS -->
+    <section id="beneficios" class="max-w-6xl mx-auto px-6 py-20">
+        <div class="text-center mb-12">
+            <span class="text-emerald-700 font-semibold text-sm tracking-[2px]">LA DIFERENCIA AGROFLUX</span>
+            <h2 class="section-title text-5xl tracking-tighter mt-3">Tecnología que trabaja por ti</h2>
+        </div>
+        
+        <div class="grid md:grid-cols-3 gap-6">
+            <div class="bg-white p-8 rounded-3xl border border-zinc-100 group">
+                <div class="w-14 h-14 bg-emerald-100 text-emerald-700 rounded-2xl flex items-center justify-center mb-6 group-hover:rotate-12 transition-transform">
+                    <i class="fa-solid fa-tint fa-2x"></i>
+                </div>
+                <h3 class="font-semibold text-2xl mb-3">Fija el agua y los nutrientes</h3>
+                <p class="text-zinc-600">FIJA-FLUX usa electronegatividad de diseño para retener la solución nutritiva en la zona radicular. Menos evaporación, menos lixiviación, riegos más espaciados.</p>
+                <div class="mt-6 text-xs font-mono text-emerald-700">50 L/ha • 180 días de efecto</div>
+            </div>
+            
+            <div class="bg-white p-8 rounded-3xl border border-zinc-100 group">
+                <div class="w-14 h-14 bg-emerald-100 text-emerald-700 rounded-2xl flex items-center justify-center mb-6 group-hover:rotate-12 transition-transform">
+                    <i class="fa-solid fa-shield-halved fa-2x"></i>
+                </div>
+                <h3 class="font-semibold text-2xl mb-3">Protege contra hongos y bacterias</h3>
+                <p class="text-zinc-600">Con INMUNOESPORAX e INMUNOVECTOR (IMF de coco) eliminas fitopatógenos vasculares y regeneras el sistema circulatorio de la planta (xilema y floema).</p>
+            </div>
+            
+            <div class="bg-white p-8 rounded-3xl border border-zinc-100 group">
+                <div class="w-14 h-14 bg-emerald-100 text-emerald-700 rounded-2xl flex items-center justify-center mb-6 group-hover:rotate-12 transition-transform">
+                    <i class="fa-solid fa-chart-line fa-2x"></i>
+                </div>
+                <h3 class="font-semibold text-2xl mb-3">Nutrición precisa sin residuos</h3>
+                <p class="text-zinc-600">N-50, P-50 y K-50 mejoran la absorción de macronutrientes en etapas críticas sin dejar sales ni aumentar conductividad eléctrica del suelo.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- PLANES -->
+    <section id="planes" class="bg-white py-16 border-y border-zinc-200">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center mb-12">
+                <span class="px-4 py-1 bg-emerald-100 text-emerald-700 rounded-full text-xs font-bold tracking-widest">SUSCRIPCIÓN MENSUAL</span>
+                <h2 class="section-title text-5xl tracking-tighter mt-4">Elige el plan ideal para tu rancho</h2>
+                <p class="text-zinc-600 mt-3 max-w-md mx-auto">Todo incluido: diagnóstico, aplicación profesional, reportes y soporte técnico.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+                <!-- Básico -->
+                <div class="plan-card bg-white border border-zinc-200 rounded-3xl p-8 flex flex-col">
+                    <div class="mb-auto">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <div class="text-sm font-semibold text-zinc-500">BÁSICO</div>
+                                <div class="text-5xl font-bold mt-1">2,800</div>
+                                <div class="text-sm text-zinc-500">MXN / mes</div>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-xs bg-amber-100 text-amber-700 px-3 py-1 rounded-2xl font-medium">1-2 ha</div>
+                            </div>
+                        </div>
+                        
+                        <ul class="mt-8 space-y-3 text-sm">
+                            <li class="flex gap-x-3"><i class="fa-solid fa-check text-emerald-600 mt-1"></i> <span>Diagnóstico de suelo + recomendación</span></li>
+                            <li class="flex gap-x-3"><i class="fa-solid fa-check text-emerald-600 mt-1"></i> <span>Aplicación manual con aspersora</span></li>
+                            <li class="flex gap-x-3"><i class="fa-solid fa-check text-emerald-600 mt-1"></i> <span>Reporte fotográfico mensual</span></li>
+                            <li class="flex gap-x-3"><i class="fa-solid fa-check text-emerald-600 mt-1"></i> <span>Acceso a app básica</span></li>
+                        </ul>
+                    </div>
+                    
+                    <button onclick="selectPlan('Básico', 2800)" 
+                            class="mt-8 w-full py-4 bg-zinc-900 hover:bg-black text-white rounded-3xl font-semibold transition-all active:scale-[0.985]">
+                        Suscribirme
+                    </button>
+                </div>
+                
+                <!-- Estándar -->
+                <div class="plan-card bg-emerald-700 text-white rounded-3xl p-8 flex flex-col relative scale-[1.03] shadow-2xl border-2 border-emerald-600">
+                    <div class="absolute -top-3 right-6 bg-white text-emerald-700 text-xs font-bold px-4 py-1 rounded-2xl">MÁS ELEGIDO</div>
+                    
+                    <div class="mb-auto">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <div class="text-sm font-semibold text-emerald-300">ESTÁNDAR</div>
+                                <div class="text-5xl font-bold mt-1">7,900</div>
+                                <div class="text-sm text-emerald-300">MXN / mes</div>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-xs bg-white/20 px-3 py-1 rounded-2xl font-medium">3-5 ha</div>
+                            </div>
+                        </div>
+                        
+                        <ul class="mt-8 space-y-3 text-sm">
+                            <li class="flex gap-x-3"><i class="fa-solid fa-check text-emerald-300 mt-1"></i> <span>Todo del Básico</span></li>
+                            <li class="flex gap-x-3"><i class="fa-solid fa-check text-emerald-300 mt-1"></i> <span>Aplicación con equipo motorizado</span></li>
+                            <li class="flex gap-x-3"><i class="fa-solid fa-check text-emerald-300 mt-1"></i> <span>2 visitas técnicas al mes</span></li>
+                            <li class="flex gap-x-3"><i class="fa-solid fa-check text-emerald-300 mt-1"></i> <span>Alertas de riego optimizado</span></li>
+                            <li class="flex gap-x-3"><i class="fa-solid fa-check text-emerald-300 mt-1"></i> <span>Soporte prioritario por WhatsApp</span></li>
+                        </ul>
+                    </div>
+                    
+                    <button onclick="selectPlan('Estándar', 7900)" 
+                            class="mt-8 w-full py-4 bg-white text-emerald-800 hover:bg-amber-50 font-semibold rounded-3xl transition-all active:scale-[0.985]">
+                        Elegir Estándar
+                    </button>
+                </div>
+                
+                <!-- Pro -->
+                <div class="plan-card bg-white border border-zinc-200 rounded-3xl p-8 flex flex-col">
+                    <div class="mb-auto">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <div class="text-sm font-semibold text-zinc-500">PRO</div>
+                                <div class="text-5xl font-bold mt-1">13,500</div>
+                                <div class="text-sm text-zinc-500">MXN / mes</div>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-xs bg-emerald-100 text-emerald-700 px-3 py-1 rounded-2xl font-medium">6-10 ha</div>
+                            </div>
+                        </div>
+                        
+                        <ul class="mt-8 space-y-3 text-sm">
+                            <li class="flex gap-x-3"><i class="fa-solid fa-check text-emerald-600 mt-1"></i> <span>Todo del Estándar</span></li>
+                            <li class="flex gap-x-3"><i class="fa-solid fa-check text-emerald-600 mt-1"></i> <span>Monitoreo con sensores básicos</span></li>
+                            <li class="flex gap-x-3"><i class="fa-solid fa-check text-emerald-600 mt-1"></i> <span>Optimización de riego con IA</span></li>
+                            <li class="flex gap-x-3"><i class="fa-solid fa-check text-emerald-600 mt-1"></i> <span>Reporte de ahorro detallado</span></li>
+                            <li class="flex gap-x-3"><i class="fa-solid fa-check text-emerald-600 mt-1"></i> <span>Acceso prioritario a nuevos productos NuPoK</span></li>
+                        </ul>
+                    </div>
+                    
+                    <button onclick="selectPlan('Pro', 13500)" 
+                            class="mt-8 w-full py-4 border border-emerald-700 text-emerald-700 hover:bg-emerald-50 font-semibold rounded-3xl transition-all active:scale-[0.985]">
+                        Suscribirme al Pro
+                    </button>
+                </div>
+            </div>
+            
+            <p class="text-center text-xs text-zinc-500 mt-8">* Precios por hectárea. El plan Empresarial (+10 ha) se cotiza a la medida.</p>
+        </div>
+    </section>
+
+    <!-- CÓMO FUNCIONA -->
+    <section id="como-funciona" class="max-w-5xl mx-auto px-6 py-20">
+        <div class="text-center mb-12">
+            <h2 class="section-title text-5xl tracking-tighter">4 pasos para empezar a ahorrar agua</h2>
+        </div>
+        
+        <div class="grid md:grid-cols-4 gap-6">
+            <div class="text-center">
+                <div class="mx-auto w-16 h-16 bg-emerald-100 rounded-2xl flex items-center justify-center mb-5">
+                    <span class="text-3xl font-bold text-emerald-700">1</span>
+                </div>
+                <div class="font-semibold text-xl mb-2">Regístrate en la app</div>
+                <p class="text-sm text-zinc-600 px-4">Ingresa los datos de tu rancho, cultivos y hectáreas. Recibe diagnóstico inicial en 48 hrs.</p>
+            </div>
+            <div class="text-center">
+                <div class="mx-auto w-16 h-16 bg-emerald-100 rounded-2xl flex items-center justify-center mb-5">
+                    <span class="text-3xl font-bold text-emerald-700">2</span>
+                </div>
+                <div class="font-semibold text-xl mb-2">Elige tu plan y paga</div>
+                <p class="text-sm text-zinc-600 px-4">Suscripción mensual automática. Primer mes con 20% de descuento.</p>
+            </div>
+            <div class="text-center">
+                <div class="mx-auto w-16 h-16 bg-emerald-100 rounded-2xl flex items-center justify-center mb-5">
+                    <span class="text-3xl font-bold text-emerald-700">3</span>
+                </div>
+                <div class="font-semibold text-xl mb-2">Recibe aplicación profesional</div>
+                <p class="text-sm text-zinc-600 px-4">Nuestro equipo aplica FIJA-FLUX + productos NuPoK directamente en tu suelo con equipo especializado.</p>
+            </div>
+            <div class="text-center">
+                <div class="mx-auto w-16 h-16 bg-emerald-100 rounded-2xl flex items-center justify-center mb-5">
+                    <span class="text-3xl font-bold text-emerald-700">4</span>
+                </div>
+                <div class="font-semibold text-xl mb-2">Monitorea resultados</div>
+                <p class="text-sm text-zinc-600 px-4">Fotos, métricas de ahorro y recomendaciones en tu app. Renueva o ajusta cada mes.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- DEMO INTERACTIVA -->
+    <section id="demo" class="bg-zinc-900 text-white py-16">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="text-center mb-10">
+                <span class="text-emerald-400 text-sm font-bold">PRUEBA LA EXPERIENCIA</span>
+                <h2 class="text-4xl font-bold tracking-tight mt-2">Simulador de AgroFlux</h2>
+                <p class="text-zinc-400 mt-2">Registra tu predio y ve cómo sería tu primer mes</p>
+            </div>
+            
+            <div class="bg-zinc-800 rounded-3xl p-8 max-w-lg mx-auto">
+                <div class="space-y-6">
+                    <div>
+                        <label class="text-xs font-medium text-zinc-400 block mb-1.5">NOMBRE DEL RANCHO / PRODUCTOR</label>
+                        <input id="ranchName" type="text" value="Rancho El Milagro - Monterrey" 
+                               class="w-full bg-zinc-900 border border-zinc-700 rounded-2xl px-5 py-3 text-white placeholder:text-zinc-500 focus:outline-none focus:border-emerald-600">
+                    </div>
+                    
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="text-xs font-medium text-zinc-400 block mb-1.5">HECTÁREAS</label>
+                            <input id="hectareas" type="number" value="4.5" 
+                                   class="w-full bg-zinc-900 border border-zinc-700 rounded-2xl px-5 py-3 text-white focus:outline-none focus:border-emerald-600">
+                        </div>
+                        <div>
+                            <label class="text-xs font-medium text-zinc-400 block mb-1.5">CULTIVO PRINCIPAL</label>
+                            <select id="cultivo" class="w-full bg-zinc-900 border border-zinc-700 rounded-2xl px-5 py-3 text-white focus:outline-none focus:border-emerald-600">
+                                <option>Tomate</option>
+                                <option>Chile serrano</option>
+                                <option>Nogal</option>
+                                <option>Cítricos</option>
+                                <option>Maíz</option>
+                                <option>Alfalfa</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label class="text-xs font-medium text-zinc-400 block mb-1.5">PLAN RECOMENDADO</label>
+                        <div class="bg-emerald-900/40 border border-emerald-700 rounded-2xl px-5 py-4 flex justify-between items-center">
+                            <div>
+                                <div class="font-semibold">Estándar (3-5 ha)</div>
+                                <div class="text-xs text-emerald-400">$7,900 MXN/mes</div>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-xs text-emerald-400">Recomendado para ti</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button onclick="simulateRegistration()" 
+                            class="w-full py-4 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold rounded-3xl flex items-center justify-center gap-x-3 active:scale-[0.985] transition-all">
+                        <span>REGISTRAR Y SIMULAR PRIMER MES</span>
+                        <i class="fa-solid fa-rocket"></i>
+                    </button>
+                    
+                    <div class="text-center text-[10px] text-zinc-500">Sin compromiso • Demo 100% funcional</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIOS -->
+    <section class="max-w-5xl mx-auto px-6 py-16">
+        <div class="text-center mb-10">
+            <h3 class="font-semibold text-3xl">Lo que dicen los productores</h3>
+        </div>
+        
+        <div class="grid md:grid-cols-2 gap-6">
+            <div class="bg-white p-7 rounded-3xl border border-zinc-100">
+                <div class="flex gap-x-4">
+                    <img src="https://i.pravatar.cc/48?img=32" class="w-12 h-12 rounded-full" alt="">
+                    <div>
+                        <div class="font-semibold">Ing. Carlos Hernández</div>
+                        <div class="text-xs text-zinc-500">Rancho Santa Rosa • 28 ha de tomate • Nuevo León</div>
+                    </div>
+                </div>
+                <div class="mt-5 text-sm text-zinc-600">"En 3 semanas reduje de 3 riegos semanales a 2. El ahorro en agua y energía de bombeo fue de $18,400 el primer mes. Mi producción subió 19%. Ya renové por 6 meses."</div>
+                <div class="text-emerald-700 text-xs mt-4 font-medium">— Plan Pro • 3 meses activo</div>
+            </div>
+            
+            <div class="bg-white p-7 rounded-3xl border border-zinc-100">
+                <div class="flex gap-x-4">
+                    <img src="https://i.pravatar.cc/48?img=47" class="w-12 h-12 rounded-full" alt="">
+                    <div>
+                        <div class="font-semibold">Sra. María Elena Vázquez</div>
+                        <div class="text-xs text-zinc-500">Ejido La Gloria • 6 ha de chile • Tamaulipas</div>
+                    </div>
+                </div>
+                <div class="mt-5 text-sm text-zinc-600">"Tenía problemas fuertes de hongo gris. Con INMUNOESPORAX + FIJA-FLUX la planta se recuperó en 12 días. Ahora uso solo 1 aplicación cada 6 meses y mi cosecha es la mejor en 5 años."</div>
+                <div class="text-emerald-700 text-xs mt-4 font-medium">— Plan Estándar • 4 meses activo</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA FINAL -->
+    <div class="bg-emerald-700 py-16">
+        <div class="max-w-xl mx-auto text-center px-6">
+            <h2 class="text-white text-4xl font-bold tracking-tight">¿Listo para que tu campo produzca más con menos agua?</h2>
+            <p class="text-emerald-200 mt-4">Únete a los 127 productores que ya están ahorrando y mejorando su margen.</p>
+            
+            <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+                <button onclick="requestDemo()" 
+                        class="px-9 py-4 bg-white text-emerald-800 font-semibold rounded-3xl flex-1 sm:flex-none hover:bg-amber-50 active:scale-[0.985]">
+                    Solicitar demo gratis ahora
+                </button>
+                <button onclick="window.open('https://wa.me/528123456789?text=Hola%20AgroFlux%2C%20quiero%20informaci%C3%B3n%20sobre%20planes', '_blank')" 
+                        class="px-9 py-4 border border-white/50 text-white font-semibold rounded-3xl flex-1 sm:flex-none hover:bg-white/10">
+                    <i class="fa-brands fa-whatsapp mr-2"></i> Chatear por WhatsApp
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-zinc-950 text-zinc-400 py-10 text-xs">
+        <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between gap-y-4 items-center">
+            <div>© 2026 AgroFlux • Tecnología NuPoK para el agro del norte de México</div>
+            <div class="flex gap-x-6">
+                <a href="#" class="hover:text-white">Términos</a>
+                <a href="#" class="hover:text-white">Privacidad</a>
+                <a href="#" class="hover:text-white">Soporte</a>
+            </div>
+            <div class="flex items-center gap-x-2 text-[10px]">
+                Hecho con ❤️ para el campo mexicano
+            </div>
+        </div>
+    </footer>
+
+    <!-- MODAL DE ÉXITO -->
+    <div id="successModal" class="hidden fixed inset-0 bg-black/70 flex items-center justify-center z-[100]">
+        <div class="bg-white rounded-3xl max-w-md w-full mx-4 p-8 modal">
+            <div class="text-center">
+                <div class="mx-auto w-20 h-20 bg-emerald-100 rounded-full flex items-center justify-center mb-6">
+                    <i class="fa-solid fa-check-circle text-emerald-600 text-6xl"></i>
+                </div>
+                
+                <h3 class="text-3xl font-bold text-zinc-900">¡Registro exitoso!</h3>
+                <p class="text-zinc-600 mt-3">Tu demo de 0.5 ha ha sido agendada para esta semana.<br>Recibirás un mensaje de WhatsApp en los próximos minutos.</p>
+                
+                <div class="mt-8 bg-zinc-50 p-4 rounded-2xl text-left text-sm">
+                    <div class="font-medium mb-2">Próximos pasos:</div>
+                    <ol class="list-decimal list-inside text-zinc-600 space-y-1 text-xs">
+                        <li>Te contactaremos para confirmar fecha y hora</li>
+                        <li>Aplicación de FIJA-FLUX + diagnóstico</li>
+                        <li>Primer reporte en 15 días</li>
+                    </ol>
+                </div>
+                
+                <button onclick="closeModal()" 
+                        class="mt-6 w-full py-3.5 bg-emerald-700 text-white font-semibold rounded-3xl active:scale-[0.985]">
+                    Entendido, gracias
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function scrollToPlans() {
+            document.getElementById('planes').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+        
+        function selectPlan(planName, price) {
+            const modal = document.createElement('div');
+            modal.className = 'fixed inset-0 bg-black/70 flex items-center justify-center z-[100]';
+            modal.innerHTML = `
+                <div class="bg-white rounded-3xl max-w-md w-full mx-4 p-8 modal">
+                    <div class="text-center">
+                        <i class="fa-solid fa-credit-card text-6xl text-emerald-600 mb-4"></i>
+                        <h3 class="text-3xl font-bold">Suscripción ${planName}</h3>
+                        <p class="text-4xl font-bold text-emerald-700 mt-3">$${price} <span class="text-base font-normal text-zinc-500">MXN/mes</span></p>
+                        
+                        <div class="my-8 text-left bg-zinc-50 p-5 rounded-2xl text-sm">
+                            <div class="font-semibold mb-3">Incluye este mes:</div>
+                            <ul class="space-y-2 text-xs">
+                                <li class="flex items-center gap-x-2"><i class="fa-solid fa-check text-emerald-600"></i> Aplicación completa de FIJA-FLUX</li>
+                                <li class="flex items-center gap-x-2"><i class="fa-solid fa-check text-emerald-600"></i> Diagnóstico técnico personalizado</li>
+                                <li class="flex items-center gap-x-2"><i class="fa-solid fa-check text-emerald-600"></i> Reporte fotográfico + métricas</li>
+                                <li class="flex items-center gap-x-2"><i class="fa-solid fa-check text-emerald-600"></i> Soporte WhatsApp ilimitado</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="flex gap-x-3">
+                            <button onclick="this.closest('.fixed').remove()" class="flex-1 py-3 border border-zinc-300 font-medium rounded-3xl">Cancelar</button>
+                            <button onclick="subscribeNow('${planName}', ${price}, this)" class="flex-1 py-3 bg-emerald-700 text-white font-semibold rounded-3xl">Confirmar y pagar</button>
+                        </div>
+                        
+                        <div class="text-[10px] text-zinc-500 mt-5">Pago seguro con Mercado Pago • Cancelación en cualquier momento</div>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(modal);
+        }
+        
+        function subscribeNow(planName, price, btn) {
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-2"></i> Procesando...';
+            btn.disabled = true;
+            
+            setTimeout(() => {
+                btn.closest('.fixed').remove();
+                const success = document.getElementById('successModal');
+                success.classList.remove('hidden');
+                success.classList.add('flex');
+            }, 1450);
+        }
+        
+        function simulateRegistration() {
+            const ranch = document.getElementById('ranchName').value || 'Tu Rancho';
+            const ha = document.getElementById('hectareas').value || '4.5';
+            const cultivo = document.getElementById('cultivo').value;
+            
+            const modal = document.createElement('div');
+            modal.className = 'fixed inset-0 bg-black/70 flex items-center justify-center z-[100]';
+            modal.innerHTML = `
+                <div class="bg-white rounded-3xl max-w-md w-full mx-4 p-8 modal">
+                    <div class="text-center">
+                        <div class="mx-auto w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center mb-6">
+                            <i class="fa-solid fa-check-double text-emerald-600 text-4xl"></i>
+                        </div>
+                        
+                        <h3 class="font-bold text-2xl">¡Bienvenido a AgroFlux, ${ranch.split(' ')[0]}!</h3>
+                        
+                        <div class="my-7 text-left bg-zinc-50 p-5 rounded-2xl text-sm space-y-4">
+                            <div class="flex justify-between border-b pb-3"><span class="text-zinc-500">Hectáreas registradas</span><span class="font-semibold">${ha} ha</span></div>
+                            <div class="flex justify-between border-b pb-3"><span class="text-zinc-500">Cultivo principal</span><span class="font-semibold">${cultivo}</span></div>
+                            <div class="flex justify-between border-b pb-3"><span class="text-zinc-500">Plan recomendado</span><span class="font-semibold text-emerald-700">Estándar</span></div>
+                            <div class="flex justify-between pt-1"><span class="text-zinc-500">Primer ahorro estimado</span><span class="font-bold text-emerald-700">+38% retención de agua</span></div>
+                        </div>
+                        
+                        <button onclick="completeDemoRegistration(this)" class="w-full py-4 bg-emerald-700 hover:bg-emerald-600 text-white font-semibold rounded-3xl active:scale-[0.985]">
+                            ACTIVAR DEMO GRATIS DE 0.5 HA
+                        </button>
+                        
+                        <div class="text-xs text-zinc-500 mt-4">Sin tarjeta • Solo confirmación por WhatsApp</div>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(modal);
+        }
+        
+        function completeDemoRegistration(btn) {
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-2"></i> Agendando...';
+            setTimeout(() => {
+                btn.closest('.fixed').remove();
+                document.getElementById('successModal').classList.remove('hidden');
+                document.getElementById('successModal').classList.add('flex');
+            }, 1100);
+        }
+        
+        function requestDemo() {
+            const modal = document.createElement('div');
+            modal.className = 'fixed inset-0 bg-black/70 flex items-center justify-center z-[100]';
+            modal.innerHTML = `
+                <div class="bg-white rounded-3xl max-w-md w-full mx-4 p-8 modal">
+                    <div>
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <span class="px-3 py-1 bg-amber-100 text-amber-700 text-xs font-bold rounded-2xl">GRATIS</span>
+                                <h3 class="font-bold text-3xl mt-3">Demo de 0.5 hectáreas</h3>
+                            </div>
+                            <button onclick="this.closest('.fixed').remove()" class="text-3xl text-zinc-400 hover:text-zinc-600">×</button>
+                        </div>
+                        
+                        <div class="mt-6 space-y-5">
+                            <div><label class="text-xs font-medium text-zinc-500">Tu nombre completo</label><input id="demoName" type="text" value="Alberto García" class="mt-1 w-full border border-zinc-300 rounded-2xl px-4 py-3"></div>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div><label class="text-xs font-medium text-zinc-500">Teléfono / WhatsApp</label><input id="demoPhone" type="tel" value="81 2345 6789" class="mt-1 w-full border border-zinc-300 rounded-2xl px-4 py-3"></div>
+                                <div><label class="text-xs font-medium text-zinc-500">Municipio</label><input id="demoMunicipio" type="text" value="Monterrey" class="mt-1 w-full border border-zinc-300 rounded-2xl px-4 py-3"></div>
+                            </div>
+                            <div><label class="text-xs font-medium text-zinc-500">Cultivo y hectáreas aproximadas</label><input id="demoCultivo" type="text" value="Tomate - 4.5 ha" class="mt-1 w-full border border-zinc-300 rounded-2xl px-4 py-3"></div>
+                        </div>
+                        
+                        <button onclick="submitDemoRequest(this)" class="mt-7 w-full py-4 bg-emerald-700 text-white font-semibold rounded-3xl flex items-center justify-center gap-x-2 active:scale-[0.985]">
+                            <span>SOLICITAR DEMO GRATIS</span>
+                            <i class="fa-solid fa-calendar-check"></i>
+                        </button>
+                        
+                        <p class="text-center text-[10px] text-zinc-500 mt-4">Te contactaremos en menos de 4 horas</p>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(modal);
+        }
+        
+        function submitDemoRequest(btn) {
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-2"></i> Enviando solicitud...';
+            setTimeout(() => {
+                btn.closest('.fixed').remove();
+                const toast = document.createElement('div');
+                toast.className = 'fixed bottom-6 left-1/2 -translate-x-1/2 bg-zinc-900 text-white px-8 py-4 rounded-3xl flex items-center gap-x-3 shadow-2xl z-[200]';
+                toast.innerHTML = `<i class="fa-solid fa-check-circle text-emerald-400"></i> <span>¡Solicitud enviada! Te escribiremos por WhatsApp en breve.</span>`;
+                document.body.appendChild(toast);
+                setTimeout(() => { toast.style.transition = 'all 0.3s'; toast.style.opacity = '0'; setTimeout(() => toast.remove(), 300); }, 2800);
+            }, 1350);
+        }
+        
+        function showDemoModal() {
+            const modal = document.createElement('div');
+            modal.className = 'fixed inset-0 bg-black/80 flex items-center justify-center z-[100]';
+            modal.innerHTML = `
+                <div class="bg-white max-w-2xl w-full mx-4 rounded-3xl overflow-hidden modal">
+                    <div class="p-8">
+                        <div class="flex justify-between">
+                            <div>
+                                <span class="text-xs font-mono bg-emerald-100 text-emerald-700 px-2.5 py-px rounded">VIDEO DEMO</span>
+                                <h4 class="font-bold text-2xl mt-2">Cómo funciona AgroFlux en 60 segundos</h4>
+                            </div>
+                            <button onclick="this.closest('.fixed').remove()" class="text-4xl leading-none text-zinc-300 hover:text-zinc-500">×</button>
+                        </div>
+                        
+                        <div class="mt-6 aspect-video bg-zinc-900 rounded-2xl flex items-center justify-center relative">
+                            <div class="text-center">
+                                <i class="fa-solid fa-play text-white text-6xl opacity-90"></i>
+                                <div class="text-white text-sm mt-4 font-medium">Reproducir video explicativo</div>
+                            </div>
+                            <div class="absolute bottom-4 right-4 bg-black/60 text-white text-[10px] px-2 py-px rounded">1:04</div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-zinc-50 px-8 py-5 text-xs flex justify-between items-center border-t">
+                        <div>¿Quieres que te enviemos el video por WhatsApp?</div>
+                        <button onclick="this.closest('.fixed').remove(); requestDemo()" class="text-emerald-700 font-medium">Sí, envíamelo</button>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(modal);
+        }
+        
+        function closeModal() {
+            const modal = document.getElementById('successModal');
+            modal.classList.remove('flex');
+            modal.classList.add('hidden');
+        }
+        
+        function init() {
+            try {
+                if (!localStorage.getItem('agroflux_visited')) {
+                    console.log('%c[AgroFlux] Demo lista para Alberto', 'color:#166534');
+                    localStorage.setItem('agroflux_visited', 'true');
+                }
+            } catch(e) {}
+            
+            document.addEventListener('keydown', function(e) {
+                if (e.key === "?" && document.activeElement.tagName === "BODY") {
+                    e.preventDefault();
+                    showDemoModal();
+                }
+            });
+            
+            console.log('%c[AgroFlux] Versión final con logo + texto + slogan lista.', 'color:#166534');
+        }
+        
+        window.onload = init;
+    </script>
+</body>
+</html>
