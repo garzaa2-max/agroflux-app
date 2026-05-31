@@ -82,7 +82,7 @@
                 </div>
                 
                 <div class="hidden md:flex items-center gap-x-8 text-sm font-medium">
-                    <a href="#onboarding" class="hover:text-emerald-700 transition-colors">Onboarding</a>
+                    <a href="#Guía de inicio" class="hover:text-emerald-700 transition-colors">Guía de inicio</a>
                     <a href="#comparacion" class="hover:text-emerald-700 transition-colors">Comparación</a>
                     <a href="#dashboard" class="hover:text-emerald-700 transition-colors">Dashboard</a>
                     <a href="#casos" class="hover:text-emerald-700 transition-colors">Casos de Éxito</a>
@@ -124,7 +124,7 @@
             </p>
             
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <button onclick="startOnboarding()" 
+                <button onclick="startGuía de inicio()" 
                         class="px-10 py-4 bg-white text-emerald-800 font-semibold text-lg rounded-3xl flex items-center justify-center gap-x-3 hover:bg-amber-50 active:scale-[0.985] transition-all shadow-xl">
                     <span>Comenzar gratis (0.5 ha)</span>
                     <i class="fa-solid fa-arrow-right"></i>
@@ -154,10 +154,10 @@
         </div>
     </header>
 
-    <!-- ONBOARDING TEASER -->
-    <section id="onboarding" class="max-w-5xl mx-auto px-6 py-16">
+    <!-- Guía de inicio TEASER -->
+    <section id="Guía de inicio" class="max-w-5xl mx-auto px-6 py-16">
         <div class="text-center mb-12">
-            <span class="px-4 py-1 bg-emerald-100 text-emerald-700 rounded-full text-xs font-bold tracking-widest">ONBOARDING EN 60 SEGUNDOS</span>
+            <span class="px-4 py-1 bg-emerald-100 text-emerald-700 rounded-full text-xs font-bold tracking-widest">Guía de inicio EN 60 SEGUNDOS</span>
             <h2 class="section-title text-5xl tracking-tighter mt-4">Empieza a ahorrar agua hoy</h2>
             <p class="text-zinc-600 mt-3 max-w-md mx-auto">Responde 4 preguntas simples y recibe tu primera recomendación personalizada + estimación de ahorro.</p>
         </div>
@@ -202,9 +202,9 @@
             </div>
             
             <div class="mt-10 text-center">
-                <button onclick="startOnboarding()" 
+                <button onclick="startGuía de inicio()" 
                         class="px-12 py-4 bg-emerald-700 hover:bg-emerald-800 text-white font-semibold text-lg rounded-3xl transition-all active:scale-[0.985] shadow-lg">
-                    Comenzar onboarding gratis
+                    Comenzar Guía de inicio gratis
                 </button>
                 <div class="text-xs text-zinc-500 mt-3">Sin tarjeta • Resultados inmediatos</div>
             </div>
@@ -588,7 +588,7 @@
             <p class="text-emerald-200 mt-4">Únete a los 127 productores que ya están ahorrando y mejorando su margen con tecnología real.</p>
             
             <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
-                <button onclick="startOnboarding()" class="px-9 py-4 bg-white text-emerald-800 font-semibold rounded-3xl flex-1 sm:flex-none hover:bg-amber-50 active:scale-[0.985]">
+                <button onclick="startGuía de inicio()" class="px-9 py-4 bg-white text-emerald-800 font-semibold rounded-3xl flex-1 sm:flex-none hover:bg-amber-50 active:scale-[0.985]">
                     Solicitar demo gratis ahora
                 </button>
                 <button onclick="openWhatsApp()" class="px-9 py-4 border border-white/50 text-white font-semibold rounded-3xl flex-1 sm:flex-none hover:bg-white/10">
@@ -644,7 +644,7 @@
             document.getElementById('planes').scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
         
-        function startOnboarding() {
+        function startGuía de inicio() {
             const modal = document.createElement('div');
             modal.className = 'fixed inset-0 bg-black/70 flex items-center justify-center z-[100]';
             modal.innerHTML = `
@@ -653,7 +653,7 @@
                         <div class="mx-auto w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center mb-4">
                             <i class="fa-solid fa-rocket text-emerald-700 fa-2x"></i>
                         </div>
-                        <h3 class="font-bold text-2xl">Onboarding rápido</h3>
+                        <h3 class="font-bold text-2xl">Guía de inicio rápido</h3>
                         <p class="text-sm text-zinc-500 mt-1">Responde 4 preguntas y recibe tu primera recomendación</p>
                     </div>
                     
@@ -699,7 +699,7 @@
                     
                     <div class="mt-8 flex gap-x-3">
                         <button onclick="this.closest('.fixed').remove()" class="flex-1 py-3.5 border border-zinc-300 font-medium rounded-3xl">Cancelar</button>
-                        <button onclick="completeOnboarding(this)" class="flex-1 py-3.5 bg-emerald-700 text-white font-semibold rounded-3xl active:scale-[0.985]">Obtener recomendación</button>
+                        <button onclick="completeGuía de inicio(this)" class="flex-1 py-3.5 bg-emerald-700 text-white font-semibold rounded-3xl active:scale-[0.985]">Obtener recomendación</button>
                     </div>
                     
                     <div class="text-center text-[10px] text-zinc-400 mt-4">Tus datos son 100% confidenciales</div>
@@ -709,12 +709,12 @@
         }
         
         function selectHectareas(btn, value) {
-            document.querySelectorAll('#onboarding button').forEach(b => b.classList.remove('!border-emerald-600', '!bg-emerald-50'));
+            document.querySelectorAll('#Guía de inicio button').forEach(b => b.classList.remove('!border-emerald-600', '!bg-emerald-50'));
             btn.classList.add('!border-emerald-600', '!bg-emerald-50');
             window.selectedHectareas = value;
         }
         
-        function completeOnboarding(btn) {
+        function completeGuía de inicio(btn) {
             const cultivo = document.getElementById('cultivo').value;
             const estado = document.getElementById('estado').value;
             const hectareas = window.selectedHectareas || '5-20';
@@ -827,11 +827,11 @@
             document.addEventListener('keydown', function(e) {
                 if (e.key === "?" && document.activeElement.tagName === "BODY") {
                     e.preventDefault();
-                    startOnboarding();
+                    startGuía de inicio();
                 }
             });
             
-            console.log('%c[AgroFlux] Web actualizada con onboarding mejorado y comparación vs PlantBot', 'color:#166534');
+            console.log('%c[AgroFlux] Web actualizada con Guía de inicio mejorado y comparación vs PlantBot', 'color:#166534');
         }
         
         window.onload = init;
